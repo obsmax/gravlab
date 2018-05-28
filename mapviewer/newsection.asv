@@ -1,0 +1,65 @@
+function newsection()
+
+fig = evalin('base', 'windows.mapfig.handle;');
+figure(fig);
+hold on
+
+WindowButtonDownFcnSave = get(fig, 'WindowButtonDownFcn');
+WindowButtonMotionFcnSave = get(fig, 'WindowButtonMotionFcn');
+
+
+menus = findobj(fig, 'type', 'uimenu');
+set(menus, 'enable', 'off');
+
+
+
+xclic = [];
+yclic = [];
+hclicpoints = plot(0,0, 'ko-');
+hmovingline = plot(0,0, 'k');
+startsec = true;
+
+set(fig, 'WindowButtonDownFcn', {@clic})
+set(fig, 'WindowButtonMotionFcn', {@move})
+
+    function clic(src, evnt)
+        cp= get(gca, 'currentPoint');
+        xclic = cp(1,1);
+        yclic = cp(1,2);        
+        clicdroit = strcmp(get(src,'selectiontype'), 'alt');
+        if clicdroit
+            uiresume(fig);
+            return
+        end
+        if startsec
+            set(hclicpoints, 'Xdata',...
+                [xclic],...
+                 'Ydata',...
+                [get(hclicpoints, 'Ydata'), yclic]);
+        else    
+            set(hclicpoints, 'Xdata',...
+                [get(hclicpoints, 'Xdata'), xclic],...
+                 'Ydata',...
+                [get(hclicpoints, 'Ydata'), yclic]);
+        end
+    end
+    function move(src, evnt)
+        if isempty(xclic) || isempty(yclic)
+            return
+        end
+        cp = get(gca, 'currentPoint');
+        set(hmovingline , 'Xdata', [xclic, cp(1,1)], 'Ydata', [yclic, cp(1,2)])
+        
+    end
+
+
+
+
+%% UIWAIT
+uiwait(fig);
+set(menus, 'enable', 'on');
+set(fig, 'WindowButtonDownFcn', WindowButtonDownFcnSave);
+set(fig, 'WindowButtonMotionFcn', WindowButtonMotionFcnSave);
+
+end
+

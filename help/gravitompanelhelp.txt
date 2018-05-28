@@ -1,0 +1,35 @@
+# gravmanager/curvviewer
+# version 1.1
+# M.Lehujeur
+# 31/05/2012
+#--------------------------------------------------------------------------
+gravitom options panel
+
+gravtiom is a program originally writen in FORTRAN by F.MASSON
+This program computes the gravimetric anomaly of a 2D profile and is based on 
+the Talwani's method (1969). gravitom2.1 is a simple conversion to MATLAB language that mimics
+the result provided by gravitom as close as possible
+the algorithm has been matrix oriented to be more suitable to MATLAB strengths
+
+the curveviewer/curves/gravitom panel allow you to set gravitom input parameters :
+    npts   :  integer describing the number of measurment you want for anomaly computation
+    xmes   :  measurement locations along the x-axis
+              in "linspace" mode, the values are linearily distributed between x-coordinate 0 and x-coordinate xmax
+              the "file" mode is still not available
+              the unit corresponds to the one used in the profilviewer
+    zmes   :  measurement altitude, z-axis is oriented upward,
+              in "constant" mode, the measurement alitude is fixed to a given value
+              the unit corresponds to the one used in the profilviewer
+    irecal :  this property allow you to remove the mean from the computed data and add the mean of an other curve to allow 
+              them to be comparable on the same plot
+              use the "to" menu to select the curve you want to scale to
+    boundaries : to avoid boundary effects, the structure that join the right and left boundaries of 
+              the profile are prolongated to a given distance in profil-unit. You can enable or disable this correction here
+              and set the prolongation distance. The "distance" unit is the same as the one used in the profil viewer
+    autorefresh : in later version, it should be possible to see the curve moving when modifying the structures on the profil viewer.
+
+The output gravimertric anomaly is in mgal if the densities are expressed in g.cm^3
+        
+
+
+          

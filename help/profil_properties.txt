@@ -1,0 +1,171 @@
+# gravmanager
+# version 1.1
+# M.Lehujeur
+# 11/03/2012
+#--------------------------------------------------------------------------
+Profile properties editor :
+
+This windows allow you to modify properties to each structure in the loaded
+profile (.in).
+When you clic "Apply" or "OK" at the bottom of the window, the properties 
+in the upper pannel are read, applied to the Matlab's workspace variables,
+and the graphical display is refreshed.
+if you clic "Cancel" or close the properties editor, no change is applied to
+Matlab's workspace variables
+
+The upper panel describes the properties you want to attribuate to your structures.
+The lower panel helps you to modify the upper panel for a set a selected structures
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                          AVAILABLE PROPERTIES                           %  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+-> name
+    type :
+        string
+    description :
+        this allow you to recognize your structures, this properties is never used by the program,
+        it can be empty and two structures can have the same name.
+    syntax in the properties editor :
+        no quotes, blanks are allowed but not recommended,
+        blanks before first letter and after last letter won't be saved in the .in file
+    variable name in MATLAB workspace :
+        profil.model(i).name
+        where i is the structure number (see the first column)
+    save :
+        this property is saved in the .in file and should be ignored by gravitom
+        in case of problems, don't attribuate any name 
+-> density
+    type :
+        doubble, scalar
+    description :
+        this describes the structure density, can be NaN.
+        for gravimetric anomalies in mgal, use g/cm^3
+    syntax in the properties editor :
+        double
+    variable name in MATLAB workspace :
+        profil.model(i).rho
+        where i is the structure number (see the first column)
+    save :
+        this property is saved in the .in file
+-> order
+    type :
+        string
+        'clockwise' or 'counterclockwise'
+    description
+        this describes in which order you want to sort your summits
+        To have the correct anomaly signe, you have to turn it 'clockwise'
+        turning it 'counterclockwise' can help you to identify the part of the anomaly curve which
+        corresponds to your structure
+    syntax in the properties editor :
+        choose 'clockwise' or 'counterclockwise' with the popup menu
+    variable name in MATLAB workspace :
+        profil.model(i).order
+        where i is the structure number (see the first column)
+    save :
+        this property is not directly saved in the .in file.
+        But, when you save an .in file, the summits will be
+        written in the order corresponding to this property.
+        Then, when you load your .in file, this value is attribuated to the detected order,
+        As a consequence you can condider that this properties is saved in the in file.
+-> color
+    type :
+        3x1 element vector between 0 and 1
+    description
+        This properties help you to recognise your structures,
+        you can define your own color conventions.
+        This properties is never used by the program, to structures can have the same color.
+        Be carefull, a structure can have a color but beeing displayed according to an other 
+        proeperty like its density, its order, (see colordisplay property)...
+    syntax in the properties editor :
+        YOU MUST use brakets and comas,
+        the values MUST be between 0 and 1!!!!
+        (when you give a string, I simply evaluate this string using eval.m, so use MATLAB syntax please)
+        example : 
+            [ 0.1,0.16,1 ]
+    variable name in MATLAB workspace :
+        profil.model(i).color
+        where i is the structure number (see the first column)    
+    save :
+        in version 1.0, colors are NOT saved. when you load your .in file,
+        a color is attribuated to your structure according to its number in the file.
+        should be improved in later versions.
+-> color display :
+    type :
+        string
+        'transparent','by_density','by_order','by_color' or 'superposition_high'
+    description :
+        this define how you want to display your structures,
+            'transparent'        means no color, structure superposition will appear but could be a bit confusing
+            'by_density'         means that the structure color is proportional to the density, NaN returns red
+            'by_order'           displays a green structure if clockwise and a red one if counterclockwise
+            'by_color'           displays the structure according to the color property
+            'superposition_high' displays the structure according to the color property with a non-one alpha value
+    syntax in the properties editor :
+        choose the desired property using the popup menu
+    variable name in MATLAB workspace :
+        profil.model(i).colordisplay
+    save :
+        NOT saved in the .in file
+        
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%              MODIFY A SELECTION OF SEVERAL STRUCTURES                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+1/ MAKE THE SELECTION
+    on the right, you can select a structure, when selected, the strucure
+    is highligted in blue on the profilviewer
+    The top-right button is the selector, this button has 4 positions "p1" to "p4"
+    "p1" denotes the current selection
+    "p2" reverses the selection
+    "p3" selects all the structures
+    "p4" deselects all the structures
+    after "p4", the selector goes back to "p1" and you recover the original selection
+    if you select or deselect a structure, the selector goes directly to "p1"
+
+2/ MODIFY THE SELECTION
+    to modify the current selection (blue icones on the upper panel), you can use the lower panel, 
+    the line "mode" defines the kind of modification you want to apply
+    the line "value" is interpreted depending on the "mode" property
+
+    to modify the selection clic "OK & send", this do not modify the structures until you clic "OK"
+    or "Apply"
+
+    name : 
+        mode "name=" : 
+            this mode will atrubuate the string writen in the line "value" to selection
+        mode "add prefix" :
+            the string is added before the names of the selected structures
+        mode "add suffix" :
+            the string is added after the names of the selected structures    
+        mode "name=struct number" :
+            the selcted structure names are replaced by their numbers
+    density :
+        mode "dens=" :
+            the selected structures' densities are replaced by the value specified in the line "value"
+        mode "dens=dens+"
+            the value specified in the line "value" is added to the selected structures' densities
+        mode "dens=dens*"
+            the value specified in the line "value" is multiplied to the selected structures' densities
+    order :
+        mode "order=":
+            the selected structures' orders are set to the value specified below
+        mode "invers order":
+            all orders of the selection are reversed
+    color : 
+        mode "color=[r,g,b]":
+            specify a color by giving its [r,g,b] code in line "value". this color will be attribuated to 
+            the selection. Please use matlab syntax and values in range 0-1
+            examples :  red is [1,0,0], orange is [1,.5,0]
+        mode "inverse colors":
+            all colors of the selected structures will be reversed. No value is required for this mode
+    color display :
+        mode "color display=":
+            this mode will attribuate the display mode specified in the line "value"
+
+3/ Don't forget to clic "OK" or "Apply" before closing the window, otherwhise, you modifications are lost
+        
+
+        
+       

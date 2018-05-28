@@ -1,0 +1,33 @@
+# gravmanager
+# version 1.1
+# M.Lehujeur
+# 11/03/2012
+#--------------------------------------------------------------------------
+Mouse input corrections
+
+Description
+    Cette fenêtre permet l'activation/désactivation des corrections de clic
+    Mode création : 
+      gère les corrections de clic pendant la création d'une structure
+      recentrage sur sommet :
+        les coordonnées du clic sont ramenées au sommet le plus proche
+        la distance de recentrage s'exprime en pixels et ne varie pas avec le zoom
+        version 1.1 les corrections tiennent compte de la non-orthonormalité des
+                    axes (correction ellipsoïdales), la correction est indépendante 
+                    des dimensions du profil
+      recentrage sur segment : 
+        les coordonnées du clic sont ramenées au projeté orthogonal du segment le plus proche. 
+        version 1.1 la projection est orthogonale en apparence, elle s'adapte aux dimensions des axes. 
+      recentrage sur bords fond ou surface
+        les coordonnées sont ramenées au bord de profil le plus proche (selon les dimensions
+        du profil spécifiées dans Tools, dimensions)
+    Mode mouvement : 
+        gère les corrections de clic pendant le déplacement des sommets (Objects, modify, positions)
+        les paramètres de recentrage sont identiques aux paramètres du mode création
+    Recommendation : 
+        garder une distance de recentrage sur sommet un peu plus grande que la distance
+        de recentrage sur segment. (typiquement 5pixels / 3pixels)
+    NB : 
+        les modifications apportées aux options sont sauvegardées pour le prochain lancement
+        cliquer sur "default" pour rétablir les paramèrtes initiaux. 
+        Le fichier de sauvegarde des options sera réinitiallisé.

@@ -1,0 +1,11 @@
+function copycurves(session, ax)
+
+axes(ax)
+for i = 1:length(session.Xzfiles)
+    if strcmpi(session.Xzfiles(i).visibility,'on')
+       plot(session.Xzfiles(i).data(:,1),...
+            session.Xzfiles(i).data(:,2),...
+        'color',session.Xzfiles(i).color,...
+                    'visible',session.Xzfiles(i).visibility); 
+    end
+end

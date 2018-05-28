@@ -1,0 +1,31 @@
+function mapbuttonmotion
+    fig = findobj('type','figure', 'name','mapviewer');
+    ax = findobj(fig, 'type', 'axes');
+    cp = get(ax, 'currentpoint');
+    xmouse = cp(1,1);
+    ymouse = cp(1,2);
+    cursor = findobj(fig, 'tag', 'cursor');
+	if isempty(cursor)
+        cursor = evalin('base', 'windows.mapfig.cursor.handle;');
+    end
+    
+    dlgbox1 = findobj(fig, 'tag', 'mapdlgbox1');
+    dlgbox2 = findobj(fig, 'tag', 'mapdlgbox2');
+    
+
+	limx = get(ax, 'Xlim');
+    limy = get(ax, 'Ylim');
+    
+
+    
+	if xmouse > limx(1) && xmouse < limx(2)
+        set(cursor, 'Xdata', [limx(1), xmouse, xmouse, limx(2)], 'visible', 'on')
+        set(dlgbox1,'string',sprintf('x : %+8.4f',xmouse),...
+                                'Foregroundcolor','k')
+    end
+	if ymouse > limy(1) && ymouse < limy(2)
+        set(cursor, 'Ydata', [ymouse, limy(1), limy(2), ymouse], 'visible', 'on')
+        set(dlgbox2,'string',sprintf('y : %+8.4f',ymouse),...
+                                'Foregroundcolor','k')  
+    end
+end

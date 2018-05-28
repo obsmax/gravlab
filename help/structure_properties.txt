@@ -1,0 +1,47 @@
+# gravmanager
+# version 1.1
+# M.Lehujeur
+# 31/05/2012
+#--------------------------------------------------------------------------
+single structure properties editor
+
+this figure allow you to modify the properties of a single structure
+the properties are : 
+    name    :  name of the structure, this string will be writen in the .in file
+               please avoid punctuation and white spaces. This field can stay undefined
+    number of summits : 
+               the global convention is to repeat the first summit. A triangle has 4 summits!
+    density :  density of the structure, this can be a absolute value for model whitout holes
+               or a relative value. To obtain gravimetric anomalies in mgal, use g/cm^3.
+               (see gravitom2.1)
+    order   :  contrary to previous versions, no correction is applied after mouse input to force
+               the structure to be clockwise. You have to select the structure order here or in the profil editor.
+               BE CAREFULL, a counter-clockwise structure gives a negative anomaly!!!
+    color   :  this property can help you to identify the structures. A color is defined by its
+               RGB code (RED/GREEN/BLUE). please use values between 0 and 1 and the Matlab's syntax
+               for a 3-by-1 double array. See the colordisplay property descritpion for further details. 
+               This property is not saved in the .in file
+    colordisplay :
+               here, you can select the display mode for this specific structure
+               by default the structure is transparent. 
+                   transparent : the structure has no color, you can see graphic objects which are under the structure
+                   by_density  : the color is linearly related to the density. The colormap boundaries are fixed,
+                                 1 is white, 4 is black
+                   by_order    : clockwise structures appear in green while counterclockwise ones appear in red
+                   by_color    : the structures are displayed according to their "color" properties
+                   superposition_high :
+                               : this display mode is the same as "by_color" but an alpha is added to make
+                                 the structure a bit transparent, this helps to detect over impositions between
+                                 neighbouring structures
+    
+
+The lower part of the figure gives the structure coordinates, you cannot modify it here (use Objects/modify instead)
+the values are displayed in the profil units.
+
+the buttons "permutation up" and "permutation down" allow you to permute the summits, this can solve some issues
+for structures aligned with the profile boundaries, it is recommended to avoid the first (and last) summit
+to be aligned with the profil boundaries.
+
+Until you clic "ok" no modification is applied to the background data.
+
+
