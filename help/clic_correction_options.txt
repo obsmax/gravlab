@@ -1,4 +1,4 @@
-# gravmanager
+# gravlab
 # version 1.1
 # M.Lehujeur
 # 11/03/2012

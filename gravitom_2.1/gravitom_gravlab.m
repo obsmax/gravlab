@@ -1,4 +1,4 @@
-function g = gravitom_gravmanager(xmes, zmes, irecal, irecalmean, prolh, prolhdist) 
+function g = gravitom_gravlab(xmes, zmes, irecal, irecalmean, prolh, prolhdist) 
 
 xmax = evalin('base', 'profil.xmax');
 model =  evalin('base', 'profil.model');

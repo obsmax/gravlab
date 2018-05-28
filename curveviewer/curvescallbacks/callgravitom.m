@@ -22,7 +22,7 @@ prolh = evalin('base',['session.Xzfiles(',num2str(ncurve),').gravitom_options.pr
         prolhdist = NaN;
     end
 
-g = gravitom_gravmanager(xmes, zmes, irecal, irecalmean, prolh, prolhdist);
+g = gravitom_gravlab(xmes, zmes, irecal, irecalmean, prolh, prolhdist);
 evalin('base',['session.Xzfiles(',num2str(ncurve),').data = ', mat2str([xmes',g']),';']);
 refreshcurves({'data','x'},ncurve)
 

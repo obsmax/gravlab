@@ -1,7 +1,7 @@
 try
     a=session.HOME;clear a;
 catch
-    errordlg('please run gravmanager as a parent application')
+    errordlg('please run gravlab as a parent application')
     return
 end
 

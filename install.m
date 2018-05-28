@@ -43,6 +43,6 @@ savepath
 
 
 
-fprintf('GRAVMANAGER 1.2 sucessfully installed in directory \n\t%s\n',HOME)
+fprintf('GRAVLAB 1.2 sucessfully installed in directory \n\t%s\n',HOME)
 %% clean up
 clear fid HOME SEP

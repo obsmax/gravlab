@@ -1,8 +1,8 @@
-function gravmanager1_2(varargin)
+function gravlab1_2(varargin)
 
 try
     windows = evalin('base', 'windows;');
-    if strcmpi(questdlg(sprintf('gravmanager %s is already running, \nforce quit and restart ? \n!!! ALL UNSAVED DATA WILL BE LOST !!!?', evalin('base','session.VERSION;'))),'Yes')
+    if strcmpi(questdlg(sprintf('gravlab %s is already running, \nforce quit and restart ? \n!!! ALL UNSAVED DATA WILL BE LOST !!!?', evalin('base','session.VERSION;'))),'Yes')
         close all force
     else
         return
@@ -10,7 +10,7 @@ try
 end
 
 evalin('base','clear all;close all')
-evalin('base','main_gravmanager1_2;')
+evalin('base','main_gravlab1_2;')
 if nargin >=1
     evalin('base',['session.infile = ''',varargin{1},''';',...
                  '[profil.xmax,profil.model,erreur]=read_in(session.infile);',...

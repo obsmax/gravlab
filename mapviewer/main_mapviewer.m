@@ -1,7 +1,7 @@
 %main_mapviewer : 
-% main application for maps in gravmanager,
+% main application for maps in gravlab,
 % the program is disgned such as 
-% the mapviewer can be run as a child application of gravmanager or 
+% the mapviewer can be run as a child application of gravlab or 
 % independently
 
 %% OPEN MAPVIEWER
