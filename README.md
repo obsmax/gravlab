@@ -1,16 +1,25 @@
-gravlab 
-version 1.2
-owner : M.Lehujeur
-date  : 23 Feb 2012
+# Gravlab 
+A Matlab GUI for 2d gravimetric modeling  
 
-% ---------------------------------  
-gravimetric model builder  
-based on Talwani et al., 1969  
-gravitom converted to matlab after original code from Frederic Masson, strasbourg university  
+version 1.2  
+M.Lehujeur  
+23 Feb 2012  
 
-% ---------------------------------  
-install :  
-open matlab  
-run install.m  
-this will create the matlab file getHOME.m and set the path  
+* Create 2d polygonals structures
+* Compute the gravimetric response of a profile using gravitom (F. Masson, Strasbourg university)  
+  Based on Talwani et al., 1969  
 
+
+### Install and launch in Matlab  
+* move to gravlab path
+* run install.m
+```
+>> install  
+```
+this will create the matlab file getHOME.m and set the path
+* launch the gravlab GUI 
+```
+>> gravlab1_2
+```
+
+![image info](demo_gravlab.png)
